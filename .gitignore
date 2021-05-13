@@ -3,3 +3,5 @@ node_modules
 /.svelte-kit
 /build
 /functions
+/latex_to_json/source
+/src/json_collection
