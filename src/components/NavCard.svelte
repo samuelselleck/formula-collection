@@ -16,9 +16,10 @@
         border: solid 2px #DDD;
         border-radius:10px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        line-height: 200%;
+        line-height: 300%;
         min-width: 300px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        font-family: 'Open Sans', sans-serif;
+        text-decoration: none;
         color:black;
     }
 

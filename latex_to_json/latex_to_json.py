@@ -2,11 +2,13 @@
 import zipfile as zip
 import json
 from pathlib import Path
+import os
 
 EXPORT_SRC_FOLDER = "../src/json"
 
 def main():
-    with zip.ZipFile("source/Formelsamling.zip") as zip_f:
+
+    with zip.ZipFile(abs_path("source/Formelsamling.zip")) as zip_f:
         with zip_f.open("main.tex", 'r') as tex_f:
             latex = tex_f.read().decode("utf-8")
             sections = latex.split("\\section{")
@@ -21,10 +23,7 @@ def to_subject(raw):
     header, body = raw.split("}", 1)
     sections = body.split("\subsection{")
     c_header, *categories_raw = sections
-    if categories_raw:
-        categories = dict(to_category(c) for c in categories_raw)
-    else:
-        categories = {}
+    categories = dict(to_category(c) for c in categories_raw)
     return (to_filename(header), {"header": header, "categories": categories})
 
 def to_category(raw):
@@ -38,9 +37,12 @@ def find_equations(raw):
     return equations
 
 def export_json(subjects):
-    with open(f'{EXPORT_SRC_FOLDER}/subjects.json', "w") as f:
-        json.dump(subjects, f, indent=4, sort_keys=True)
+    with open(abs_path(f'{EXPORT_SRC_FOLDER}/subjects.json'), "w") as f:
+        json.dump(subjects, f, indent=4)
 
+def abs_path(rel):
+    script_dir = os.path.dirname(__file__)
+    return os.path.join(script_dir, rel)
 
 def to_filename(s):
     name = s

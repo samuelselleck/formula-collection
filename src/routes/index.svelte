@@ -14,9 +14,9 @@
 	})
 </script>
 
-<h1>{data.header}</h1>
+
 <main>
-	
+	<h1>{data.header}</h1>
 	{#each subjects as card}
 		<div class="cardholder">
 			<NavCard {...card}/>
@@ -26,14 +26,17 @@
 </main>
 
 <style>
+	
 	h1 {
 		text-transform: uppercase;
 		text-align: center;
 		font-size: 4em;
 		font-weight: 100;
+		width:100%;
 	}
 
 	main {
+		font-family: 'Open Sans', sans-serif;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
