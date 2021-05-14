@@ -4,4 +4,4 @@ node_modules
 /build
 /functions
 /latex_to_json/source
-/src/json_collection
+/src/json

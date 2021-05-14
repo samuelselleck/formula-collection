@@ -1,4 +1,5 @@
 <script>
+    import data from '../json/subjects.json';
     export let header;
     export let url;
 </script>

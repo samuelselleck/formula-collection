@@ -5,11 +5,16 @@
 </svelte:head>
 
 <script>
-    import subjects from '../json_collection/subjects.json';
+    import data from '../json/subjects.json';
     import NavCard from '../components/NavCard.svelte';
 
+	let s = data.subjects
+    let subjects = Object.keys(s).map(e => {
+		return {url: e, header: s[e].header};
+	})
 </script>
-<h1>Formula Collection</h1>
+
+<h1>{data.header}</h1>
 <main>
 	
 	{#each subjects as card}

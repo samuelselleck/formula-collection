@@ -1,21 +1,30 @@
-<svelte:head>
-    <script type="text/javascript" id="MathJax-script" async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'></script>
-</svelte:head>
-
 <script context="module">
+    import katex from 'katex'
+    import data from '../../../json/subjects.json';
+
     export async function load(ctx) {
         let { subject, category } = ctx.page.params
-        let categoryData = (await import(`../../../json_collection/subjects/${subject}/${category}/${category}.json`)).default;
-        return {props: {categoryData}}
+        let s = data.subjects[subject].categories[category].equations
+        let equations = s.map(raw => katex.renderToString(raw, {throwOnError: false}))
+        return {props: {equations}}
     }
 </script>
 
 <script>
-    export let categoryData;
+    export let equations;
 </script>
 
-{#if categoryData}
-{#each categoryData as equation}
-    <div>$${equation}$$</div>
+{#if equations}
+{#each equations as equation}
+    <div class="equation">{@html equation}</div>
 {/each}
 {/if}
+
+<style>
+    .equation {
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
