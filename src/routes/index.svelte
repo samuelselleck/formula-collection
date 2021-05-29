@@ -1,6 +1,5 @@
 
 <svelte:head>
-    <!--<script defer src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'></script>-->
     <title> Formula Collection </title>
 </svelte:head>
 
@@ -8,7 +7,7 @@
     import data from '../json/subjects.json';
     import NavCard from '../components/NavCard.svelte';
 
-	let s = data.subjects
+	let s = data.body
     let subjects = Object.keys(s).map(e => {
 		return {url: e, header: s[e].header};
 	})
