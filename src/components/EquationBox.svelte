@@ -7,7 +7,7 @@
 </script>
 
 <div class="equationbox"> 
-    <h3> {header} </h3>
+    <h2> {header} </h2>
     {#each equations as equation}
         <Equation {equation}></Equation>
     {/each}
@@ -15,8 +15,6 @@
 
 <style>
     .equationbox {
-        font-family: 'Open Sans', sans-serif;
-        text-decoration: underline;
         margin: 20px;
         flex-direction: column;
         display: flex;

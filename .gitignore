@@ -1,7 +1,9 @@
 .DS_Store
+build_config.txt
 node_modules
 /.svelte-kit
 /build
+/formulas
 /functions
 /latex_to_json/source
 /src/json

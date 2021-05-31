@@ -1,5 +1,5 @@
 {
-  "name": "~TODO~",
+  "name": "formula-collection",
   "version": "0.0.1",
   "scripts": {
     "dev": "svelte-kit dev",
@@ -7,13 +7,12 @@
     "preview": "svelte-kit preview"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.9",
-    "@sveltejs/kit": "next",
+    "@sveltejs/adapter-static": "^1.0.0-next.12",
+    "@sveltejs/kit": "^1.0.0-next.111",
     "svelte": "^3.34.0"
   },
   "type": "module",
   "dependencies": {
-    "katex": "^0.13.10",
-    "mathjax": "^3.1.4"
+    "katex": "^0.13.11"
   }
 }

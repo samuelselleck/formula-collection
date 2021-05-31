@@ -4,9 +4,26 @@
 		<meta charset="utf-8" />
 		<!--<link rel="icon" href="/favicon.ico" />-->
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
 		%svelte.head%
 	</head>
 	<body>
 		<div id="svelte">%svelte.body%</div>
 	</body>
 </html>
+
+<style>
+	body {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+	}
+
+	h1 {
+		font-weight: 300;
+	}
+
+	h2 {
+		font-weight: 700;
+	}
+</style>

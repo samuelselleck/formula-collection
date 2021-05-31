@@ -35,11 +35,9 @@
 	}
 
 	main {
-		font-family: 'Open Sans', sans-serif;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-
 		text-align: center;
 		padding: 0;
 		margin: 0;
