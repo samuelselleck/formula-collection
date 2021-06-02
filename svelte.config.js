@@ -5,11 +5,11 @@ const config = {
 	kit: {
 		adapter: adapter({
 			// default options are shown
-			pages: 'build',
-			assets: 'build',
+			pages: 'formulas',
 			fallback: null
 		}),
 		target: '#svelte',
+		hydrate: false,
 	}
 };
 

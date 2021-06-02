@@ -24,7 +24,7 @@
 
     @media only screen and (max-width: 600px) {
         .card {
-            font-size: 0.8em;
+            font-size: 0.6em;
         }
     }
 </style>

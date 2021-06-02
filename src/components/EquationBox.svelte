@@ -7,7 +7,7 @@
 </script>
 
 <div class="equationbox"> 
-    <h2> {header} </h2>
+    <h3> {header} </h3>
     {#each equations as equation}
         <Equation {equation}></Equation>
     {/each}

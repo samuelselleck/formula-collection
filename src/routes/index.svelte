@@ -30,7 +30,6 @@
 		text-transform: uppercase;
 		text-align: center;
 		font-size: 4em;
-		font-weight: 100;
 		width:100%;
 	}
 
@@ -47,6 +46,12 @@
 		flex-grow: 1;
 		padding: 8px;
 		width: min-content;
+	}
+
+	@media screen and (max-width: 600px) {
+		h1 {
+			font-size: 2em;
+		}
 	}
 
 </style>
