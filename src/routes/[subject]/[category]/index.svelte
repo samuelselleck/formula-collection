@@ -13,6 +13,10 @@
     }
 </script>
 
+<svelte:head>
+    <title> {header} </title>
+</svelte:head>
+
 <script>
     import EquationBox from '../../../components/EquationBox.svelte';
     export let equation_sets;

@@ -6,11 +6,15 @@
         let header = data.body[subject].header
         let s = data.body[subject].body
         let categories = Object.keys(s).map(e => {
-            return {url: `${subject}/${e}`, header: s[e].header};
+            return {url: `/${subject}/${e}`, header: s[e].header};
         })
         return {props: {categories, header}}
     }
 </script>
+
+<svelte:head>
+    <title> {header} </title>
+</svelte:head>
 
 <script>
     import NavCard from '../../components/NavCard.svelte'

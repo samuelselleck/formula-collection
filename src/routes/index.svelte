@@ -1,21 +1,31 @@
 
 <svelte:head>
-    <title> Formula Collection </title>
+    <title> {header} </title>
 </svelte:head>
 
-<script>
+<script context="module">
     import data from '../json/subjects.json';
-    import NavCard from '../components/NavCard.svelte';
 
-	let s = data.body
-    let subjects = Object.keys(s).map(e => {
-		return {url: e, header: s[e].header};
-	})
+	export async function load(ctx) {
+		let header = data.header
+		let s = data.body
+		let subjects = Object.keys(s).map(e => {
+			return {url: `/${e}`, header: s[e].header};
+		})
+        return {props: {subjects, header}}
+    }
+	
 </script>
 
+<script>
+	import NavCard from '../components/NavCard.svelte';
+	
+	export let subjects;
+	export let header;
+</script>
 
 <main>
-	<h1>{data.header}</h1>
+	<h1>{header}</h1>
 	{#each subjects as card}
 		<div class="cardholder">
 			<NavCard {...card}/>

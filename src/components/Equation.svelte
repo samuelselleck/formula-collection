@@ -7,17 +7,11 @@
 
 <script>
     import katex from 'katex'
-    import { onMount } from 'svelte';
-
     export let equation;
-    let a = 1;
-    let equation_element;
-    onMount(async => {
-        katex.render(equation, equation_element, {throwOnError: false});
-    });
+    let equation_html = katex.renderToString(equation, {throwOnError: false});
 </script>
 
-<div class="equation" bind:this={equation_element}> </div>
+<div class="equation"> {@html equation_html} </div>
 
 <style>
     .equation {
