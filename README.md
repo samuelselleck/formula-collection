@@ -15,7 +15,7 @@ This project automatically generates a website from a latex document at overleaf
 - Run build.sh
 
 ## Fields in build_config.txt
-- overleaf_source <overleaf source document> - overleaf source document, in the form https://www.overleaf.com/project/<project id>
-- overleaf_session_cookie <cookie (overleaf_session2)> - overleaf session cookie, in chrome this is retrieved by pressing F12 after logging in to your overleaf account, navigating to Application -> Cookies and copying the value of "overleaf_seesion2"
+- overleaf_source <overleaf source document> - overleaf source document, in the form "https://www.overleaf.com/project/<project id>"
+- overleaf_session_cookie <cookie (overleaf_session2)> - overleaf session cookie, in chrome this is retrieved by pressing F12 after logging in to your overleaf account, navigating to Application -> Cookies and copying the value of "overleaf_session2"
 - ssh_dest <ssh destination> - in the form username@destination.com
 - download/compile/upload are boolean variables, to enable/disable parts of the build process during testing
