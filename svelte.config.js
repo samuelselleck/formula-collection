@@ -8,6 +8,9 @@ const config = {
 			fallback: null,
 		}),
 		target: '#svelte',
+		files: {
+			assets: 'src/static'
+		},
 	}
 };
 
