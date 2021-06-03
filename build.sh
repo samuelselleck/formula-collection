@@ -21,8 +21,7 @@ function print_desc {
 	echo "---------------------------------------------------------------"
 }
 
-print_desc "Installing required software"
-sudo apt install sshpass
+echo "Required software: python3, node"
 
 if [[ ${build_variables['download']} == true ]]; then
   print_desc "Downloading source from Overleaf..."
@@ -50,7 +49,7 @@ fi
 
 if [[ ${build_variables['upload']} == true ]]; then
   print_desc "uploading to webserver";
-  sshpass -p ${build_variables['ssh_password']} scp -r formulas ${build_variables['ssh_dest']}:/www/;
+  scp -r formulas ${build_variables['ssh_dest']}:/www/;
 else
   echo "Not upploading changes to webserver (upload = false)."
 fi
