@@ -21,7 +21,7 @@ function print_desc {
 	echo "---------------------------------------------------------------"
 }
 
-echo "Required software: python3, node.js"
+echo "Required software: python3, node.js/npm"
 
 if [[ ${build_variables['download']} == true ]]; then
   print_desc "Downloading source from Overleaf..."

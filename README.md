@@ -11,7 +11,7 @@ This project automatically generates a website from a latex document at overleaf
 ## Building
 - requires node.js and python 3.X
 - Copy build_config_template.txt and rename to build_config.txt and fill in fields
-- Setup ssh keys to the remote webserver
+- Setup ssh keys to the remote webserver (for example using ssh-copy-id)
 - Run build.sh
 
 ## Fields in build_config.txt
@@ -19,3 +19,4 @@ This project automatically generates a website from a latex document at overleaf
 - overleaf_session_cookie - overleaf session cookie, in chrome this is retrieved by pressing F12 after logging in to your overleaf account, navigating to Application -> Cookies and copying the value of "overleaf_session2"
 - ssh_dest - in the form username<span>@</span>destination.com
 - download/compile/upload are boolean variables, to enable/disable parts of the build process during testing
+

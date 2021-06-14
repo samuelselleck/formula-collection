@@ -23,16 +23,16 @@
 </script>
 
 <h1>{header}</h1>
-
-{#if categories}
-{#each categories as card}
-    <NavCard {...card}/>
-    <br/>
-{/each}
-{/if}
+    {#if categories}
+    {#each categories as card}
+        <div class="cardholder">
+            <NavCard {...card}/>
+        </div>
+    {/each}
+    {/if}
 
 <style>
-    h1 {
-        text-align: center;
-    }
+    .cardholder {
+		padding: 0.3cm;
+	}
 </style>

@@ -6,7 +6,7 @@
     export let header;
 </script>
 
-<div class="equationbox"> 
+<div class="equationbox normal-border"> 
     <h3> {header} </h3>
     {#each equations as equation}
         <Equation {equation}></Equation>
@@ -16,9 +16,6 @@
 <style>
     .equationbox {
         margin: 20px;
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
     }
 </style>

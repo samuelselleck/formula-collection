@@ -24,43 +24,40 @@
 	export let header;
 </script>
 
-<main>
-	<h1>{header}</h1>
+<h1>{header}</h1>
+<div class="container">
 	{#each subjects as card}
 		<div class="cardholder">
 			<NavCard {...card}/>
 		</div>
 	{/each}
-
-</main>
+</div>
 
 <style>
 	
 	h1 {
 		text-transform: uppercase;
-		text-align: center;
 		font-size: 4em;
-		width:100%;
 	}
-
-	main {
+	
+	.container {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
-		text-align: center;
-		padding: 0;
-		margin: 0;
 	}
 
 	.cardholder {
 		flex-grow: 1;
-		padding: 8px;
-		width: min-content;
+		padding: 0.3cm;
+		min-width: min-content;
 	}
 
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 700px) {
 		h1 {
-			font-size: 2em;
+            font-size: 2em;
+		}
+
+		.cardholder {
+			width: 100%;
 		}
 	}
 
