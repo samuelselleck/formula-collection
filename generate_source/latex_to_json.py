@@ -1,38 +1,83 @@
 #%%
-import zipfile as zip
+import zipfile as zipf
 import json
 import os
 import re
+import itertools
 
 EXPORT_SRC_FOLDER = "../src/json"
 
 def main():
 
-    with zip.ZipFile(abs_path("source/Formelsamling.zip")) as zip_f:
+    with zipf.ZipFile(abs_path("source/Formelsamling.zip")) as zip_f:
         with zip_f.open("main.tex", 'r') as tex_f:
             latex = tex_f.read().decode("utf-8")
             latex = remove_comments(latex)
             header = re.findall(r'\\title{(.*)}', latex)[0]
-            body = create_tree(latex)
-            export_json({"header": header, "body": body})
+            tree = create_document_tree(latex)
+            metadata = extract_metadata(tree["Metadata"])
+            del tree["Metadata"]
+            body = create_page_tree(tree, metadata)
+            export_json({"header": langs(header, metadata), "body": body, "metadata": metadata})
 
 #--------------------Parse Latex--------------------
 
 def remove_comments(raw):
     return re.sub(r'^%.*\n?', '', raw, flags=re.MULTILINE)
 
-def create_tree(raw, depth=0, max_depth=2):
+def create_document_tree(raw, depth=0, max_depth=2):
     if depth <= max_depth:
         section_name = f"{depth*'sub'}section"
         matching = f'\\\\{section_name}\*?{{'
         sections = re.findall(f"{matching}(.*)}}([\s\S]*?)(?={matching}|$)", raw)
-        return {to_filename(k):{"header": k, "body": create_tree(v, depth + 1, max_depth)} for k, v in sections}
+        return {k:create_document_tree(v, depth + 1, max_depth) for k, v in sections}
     else:
-        return find_equations(raw)
+        return raw
+
+def create_page_tree(document_tree, metadata):
+    default = metadata["default_language"]
+    page_tree = {}
+    for k, v in document_tree.items():
+        h = langs(k, metadata)
+        if isinstance(v, dict):
+            page_tree[to_filename(h[default])] = {
+                "header": h,
+                "body": create_page_tree(v, metadata)
+            }
+        else:
+            page_tree[to_filename(h[default])] = {
+                "header": h,
+                "body": {lk:find_equations(lv) for lk, lv in langs(v, metadata).items()}
+            }
+
+    return page_tree
+    
+
+def extract_metadata(metadata):
+    languages_raw = metadata["Language Settings"]["Languages"]
+    languages = re.findall(r'\\item(.*)\n?', languages_raw, flags=re.MULTILINE)
+    languages = dict(tuple([t.strip() for t in s.split("-")]) for s in languages)
+    default_lang = metadata["Language Settings"]["Default"].strip()
+    return {"languages": languages, "default_language": default_lang}
 
 def find_equations(raw):
     equations = re.findall(r'\\begin{equation}([\s\S]*?)\\end{equation}', raw)
     return [e.strip() for e in equations]
+
+def langs(raw, metadata):
+    language_versions = {}
+
+    def extract_lang(s, i):
+        parts = s.group(1).split("/")
+        if len(parts) > i:
+            return parts[i]
+        else:
+            return "< Missing Translation >"
+    
+    for i, k in enumerate(metadata["languages"].keys()):
+        language_versions[k] = re.sub(r'\[\[([\s\S]*?)\]\]',lambda s: extract_lang(s, i), raw)
+    
+    return language_versions
 
 def export_json(subjects):
     with open(abs_path(f'{EXPORT_SRC_FOLDER}/subjects.json'), "w") as f:
@@ -52,5 +97,3 @@ def to_filename(s):
 if __name__ == "__main__":
     main()
 
-
-# %%

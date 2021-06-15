@@ -1,14 +1,15 @@
 <script context="module">
-    import data from '../../../json/subjects.json';
+    import data from '../../../../json/subjects.json';
 
     export async function load(ctx) {
+        let lang = ctx.page.params.lang
         let { subject, category } = ctx.page.params
         const equation_page = data.body[subject].body[category]
         const s = equation_page.body
         let equation_sets = Object.keys(s).map(e => {
-            return {header: s[e].header, equations: s[e].body};
+            return {header: s[e].header[lang], equations: s[e].body[lang]};
         })
-        let header = equation_page.header
+        let header = equation_page.header[lang]
         return {props: {equation_sets, header}}
     }
 </script>
@@ -18,7 +19,7 @@
 </svelte:head>
 
 <script>
-    import EquationBox from '../../../components/EquationBox.svelte';
+    import EquationBox from '../../../../components/EquationBox.svelte';
     export let equation_sets;
     export let header;
 </script>

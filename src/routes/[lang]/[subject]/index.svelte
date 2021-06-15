@@ -1,12 +1,13 @@
 <script context="module">
-    import data from '../../json/subjects.json';
+    import data from '../../../json/subjects.json';
 
     export async function load(ctx) {
+        let lang = ctx.page.params.lang
         let subject = ctx.page.params.subject
-        let header = data.body[subject].header
+        let header = data.body[subject].header[lang]
         let s = data.body[subject].body
         let categories = Object.keys(s).map(e => {
-            return {url: `/${subject}/${e}`, header: s[e].header};
+            return {url: `/${lang}/${subject}/${e}`, header: s[e].header[lang]};
         })
         return {props: {categories, header}}
     }
@@ -17,7 +18,7 @@
 </svelte:head>
 
 <script>
-    import NavCard from '../../components/NavCard.svelte'
+    import NavCard from '../../../components/NavCard.svelte'
     export let categories;
     export let header;
 </script>
