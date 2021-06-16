@@ -18,6 +18,7 @@ const config = {
 		prerender: {
 			pages: Object.keys(data["metadata"]["languages"]).map(e => `/${e}`)
 		},
+		hydrate: false
 	}
 };
 

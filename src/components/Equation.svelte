@@ -8,7 +8,7 @@
 <script>
     import katex from 'katex'
     export let equation;
-    let equation_html = katex.renderToString(equation, {throwOnError: false, displayMode: true});
+    $: equation_html = katex.renderToString(equation, {throwOnError: false, displayMode: true});
 </script>
 
 <div class="equation scrollbox"> {@html equation_html} </div>

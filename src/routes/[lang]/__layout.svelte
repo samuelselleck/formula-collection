@@ -1,13 +1,3 @@
-<script context="module">
-    import data from '../../json/subjects.json';
-
-	export async function load(ctx) {
-		let lang = ctx.page.params.lang
-
-        return {props: {lang}}
-    }
-</script>
-
 <svelte:head>
     <!--Open sans font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,10 +6,53 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.10/dist/katex.min.css" integrity="sha384-0cCFrwW/0bAk1Z/6IMgIyNU3kfTcNirlObr4WjrUU7+hZeD6ravdYJ3kPWSeC31M" crossorigin="anonymous">
 </svelte:head>
 
-<script>
-	export let lang;
+<script context="module">
+    import data from '../../json/subjects.json';
+
+	export async function load(ctx) {
+		let lang = ctx.page.params.lang
+        let path = ctx.page.path.substr(3);
+        let languages = Object.entries(data["metadata"]["languages"]).map(e => ({
+            text: e[1],
+            url: `/${e[0]}${path}`
+        }))
+        return {props: {lang, languages}}
+    }
 </script>
 
+<script>
+    import { goto } from '$app/navigation';
+	export let lang;
+    export let languages;
+
+    const changeLang = async url => {
+        goto(url, {replaceState: true, noscroll: true, state: "/en"})
+    }
+</script>
+
+<div class="language-container">
+    {#if languages}
+        {#each languages as language}
+            <button class="lang-button" on:click={changeLang(language.url)}>{language.text}</button>
+        {/each}
+    {/if}
+</div>
 <main class="page-container" lang={lang}>
 <slot></slot>
 </main>
+
+<style>
+    .language-container {
+        position: fixed;
+        top: -10px;
+    }
+
+    button {
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        text-decoration: underline;
+        cursor: pointer;
+        margin: 10px;
+    }
+</style>

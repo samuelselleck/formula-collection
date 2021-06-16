@@ -25,6 +25,7 @@ echo "Required software: python3, node.js/npm"
 
 if [[ ${build_variables['download']} == true ]]; then
   print_desc "Downloading source from Overleaf..."
+  mkdir generate_source/source
   (cd generate_source/source && \
    curl ${build_variables['overleaf_source']}/download/zip \
   -H "cookie: overleaf_session2=${build_variables['overleaf_session_cookie']};" \
@@ -36,6 +37,7 @@ fi
 
 if [[ ${build_variables['compile']} == true ]]; then
   print_desc "Compiling latex source to website"
+  mkdir src/json
   #build json source from latex
   python3 generate_source/latex_to_json.py
   

@@ -4,7 +4,7 @@
     export let url;
 </script>
 
-<a href="{url}" class="card normal-border">
+<a sveltekit:prefetch href="{url}" class="card normal-border">
     <h1> {header} </h1>
 </a>
 
