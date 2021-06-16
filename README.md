@@ -7,6 +7,7 @@ This project automatically generates a website from a latex document at overleaf
 - The document title becomes the main header of the website
 - The sections, subsections turn into navigation pages
 - Once one has navigated to a subsection, the page is filled by blocks/sections based on subsubsections. Currently only equations are vissible, but in the future both textblocks, tables and figures will hopefully all be supported.
+-An internal or external link can be added to each subsubsection block by adding the line "INTERACTIVE[\<your url here\>]" to the beginning of the subsubsection. This can either be a external url, or the name of a svelte page placed under src/routes/[lang]/interactive
 
 ## Building
 - requires node.js and python 3.X

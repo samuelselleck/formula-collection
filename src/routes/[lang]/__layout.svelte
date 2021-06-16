@@ -26,7 +26,7 @@
     export let languages;
 
     const changeLang = async url => {
-        goto(url, {replaceState: true, noscroll: true, state: "/en"})
+        goto(url, {replaceState: true, noscroll: true})
     }
 </script>
 

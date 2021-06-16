@@ -47,7 +47,8 @@ def create_page_tree(document_tree, metadata):
         else:
             page_tree[to_filename(h[default])] = {
                 "header": h,
-                "body": {lk:find_equations(lv) for lk, lv in langs(v, metadata).items()}
+                "body": {lk:find_equations(lv) for lk, lv in langs(v, metadata).items()},
+                "link": find_link(v)
             }
 
     return page_tree
@@ -63,6 +64,10 @@ def extract_metadata(metadata):
 def find_equations(raw):
     equations = re.findall(r'\\begin{equation}([\s\S]*?)\\end{equation}', raw)
     return [e.strip() for e in equations]
+
+def find_link(raw):
+    link = re.findall(r'INTERACTIVE\[\\url{([\s\S]*?)}\]', raw)
+    return link[0] if len(link) > 0 else "NONE"
 
 def langs(raw, metadata):
     language_versions = {}

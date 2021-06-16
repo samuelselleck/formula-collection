@@ -1,15 +1,8 @@
 <script context="module">
-    import data from '../../../json/subjects.json';
-
+    import { getCategories } from '$lib/page_tree.js'
     export async function load(ctx) {
-        let lang = ctx.page.params.lang
-        let subject = ctx.page.params.subject
-        let header = data.body[subject].header[lang]
-        let s = data.body[subject].body
-        let categories = Object.keys(s).map(e => {
-            return {url: `/${lang}/${subject}/${e}`, header: s[e].header[lang]};
-        })
-        return {props: {categories, header}}
+        let {lang, subject} = ctx.page.params
+        return {props: getCategories(lang, subject)}
     }
 </script>
 

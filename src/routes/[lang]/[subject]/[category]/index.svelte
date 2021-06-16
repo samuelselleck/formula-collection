@@ -1,16 +1,8 @@
 <script context="module">
-    import data from '../../../../json/subjects.json';
-
+    import { getEquations} from '$lib/page_tree.js';
     export async function load(ctx) {
-        let lang = ctx.page.params.lang
-        let { subject, category } = ctx.page.params
-        const equation_page = data.body[subject].body[category]
-        const s = equation_page.body
-        let equation_sets = Object.keys(s).map(e => {
-            return {header: s[e].header[lang], equations: s[e].body[lang]};
-        })
-        let header = equation_page.header[lang]
-        return {props: {equation_sets, header}}
+        let {lang, subject, category} = ctx.page.params
+        return {props: getEquations(lang, subject, category)}
     }
 </script>
 
@@ -20,13 +12,13 @@
 
 <script>
     import EquationBox from '../../../../components/EquationBox.svelte';
-    export let equation_sets;
+    export let equationSets;
     export let header;
 </script>
 
 <h1>{header}</h1>
-{#if equation_sets}
-{#each equation_sets as equations}
+{#if equationSets}
+{#each equationSets as equations}
     <EquationBox {...equations}/>
 {/each}
 {/if}
