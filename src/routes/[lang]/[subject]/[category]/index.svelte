@@ -11,15 +11,17 @@
 </svelte:head>
 
 <script>
+    import { onMount } from 'svelte';
     import EquationBox from '../../../../components/EquationBox.svelte';
-    export let equationSets;
+    export let paragraphs;
     export let header;
+    onMount(async () => console.log(header))
 </script>
 
 <h1>{header}</h1>
-{#if equationSets}
-{#each equationSets as equations}
-    <EquationBox {...equations}/>
+{#if paragraphs}
+{#each paragraphs as parts}
+    <EquationBox {...parts}/>
 {/each}
 {/if}
 

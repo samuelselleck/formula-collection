@@ -1,14 +1,7 @@
-<script context="module">
-	export async function load(ctx) {
-        console.log(ctx)
-        return {props: {}}
-    }
-</script>
-
 <script>
     import katex from 'katex'
-    export let equation;
-    $: equation_html = katex.renderToString(equation, {throwOnError: false, displayMode: true});
+    export let body;
+    $: equation_html = katex.renderToString(body, {throwOnError: false, displayMode: true});
 </script>
 
 <div class="equation scrollbox"> {@html equation_html} </div>

@@ -3,7 +3,6 @@ import zipfile as zipf
 import json
 import os
 import re
-import itertools
 
 EXPORT_SRC_FOLDER = "../src/json"
 
@@ -62,8 +61,10 @@ def extract_metadata(metadata):
     return {"languages": languages, "default_language": default_lang}
 
 def find_equations(raw):
-    equations = re.findall(r'\\begin{equation}([\s\S]*?)\\end{equation}', raw)
-    return [e.strip() for e in equations]
+    raw = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', raw)
+    parts = re.split(r'\\begin{equation}|\\end{equation}', raw)
+    equations = parts[1::2]
+    return [{"component": "text" if i % 2 == 0 else "equation", "body": p.strip()} for i,p in enumerate(parts)]
 
 def find_link(raw):
     link = re.findall(r'INTERACTIVE\[\\url{([\s\S]*?)}\]', raw)

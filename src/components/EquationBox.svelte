@@ -2,8 +2,14 @@
 <script>
     import { goto } from '$app/navigation';
     import Equation from './Equation.svelte';
+    import Text from './Text.svelte';
 
-    export let equations;
+    const components = {
+        "text": Text,
+        "equation": Equation,
+    }
+
+    export let parts;
     export let header;
     export let url;
 
@@ -18,8 +24,8 @@
 
 <div on:click={navigate_to_interactive} class={interactive ? 'normal-border' : 'non-interactive'}> 
     <h3> {header} </h3>
-    {#each equations as equation}
-        <Equation {equation}></Equation>
+    {#each parts as part}
+        <svelte:component this={components[part.component]} body={part.body}/>
     {/each}
 </div>
 

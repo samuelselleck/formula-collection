@@ -21,15 +21,16 @@ export function getCategories(lang, subject) {
 export function getEquations(lang, subject, category) {
     const equationPage = tree.body[subject].body[category]
     const s = equationPage.body
-    let equationSets = Object.keys(s).map(e => {
+    let paragraphs = Object.keys(s).map(e => {
         let link = s[e].link
         let url = link.includes("http") ? link : `/${lang}/interactive/${s[e].link}`;
         return {
             header: s[e].header[lang],
-            equations: s[e].body[lang],
+            parts: s[e].body[lang],
             url};
     })
     let header = equationPage.header[lang]
-    return {equationSets, header}
+    console.log(paragraphs)
+    return {paragraphs, header}
     
 }
