@@ -8,7 +8,7 @@
 
 <style>
     .equation {
-        margin: 20px;
+        margin: 10px;
         display: block;
         justify-content: center;
         align-items: center;

@@ -16,14 +16,14 @@
     export let header;
 </script>
 
-<h1>{header}</h1>
-    {#if categories}
-    {#each categories as card}
-        <div class="cardholder">
-            <NavCard {...card}/>
-        </div>
-    {/each}
-    {/if}
+<br/>
+{#if categories}
+{#each categories as card}
+    <div class="cardholder">
+        <NavCard {...card}/>
+    </div>
+{/each}
+{/if}
 
 <style>
     .cardholder {

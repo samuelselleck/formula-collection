@@ -11,14 +11,12 @@
 </svelte:head>
 
 <script>
-    import { onMount } from 'svelte';
     import EquationBox from '../../../../components/EquationBox.svelte';
     export let paragraphs;
     export let header;
-    onMount(async () => console.log(header))
 </script>
 
-<h1>{header}</h1>
+<br/>
 {#if paragraphs}
 {#each paragraphs as parts}
     <EquationBox {...parts}/>

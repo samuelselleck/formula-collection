@@ -30,7 +30,27 @@ export function getEquations(lang, subject, category) {
             url};
     })
     let header = equationPage.header[lang]
-    console.log(paragraphs)
-    return {paragraphs, header}
-    
+    return {header, paragraphs}
+}
+
+export function getPathHeaders(lang, params) {
+    let identifiers = []
+
+    identifiers.push({header: tree.header[lang], url: `/${lang}`})
+
+    if(params.subject != undefined) {
+        identifiers.push({
+            header: tree.body[params.subject].header[lang],
+            url: `/${lang}/${params.subject}`
+        })
+    }
+
+    if(params.category != undefined) {
+        identifiers.push({
+            header: tree.body[params.subject].body[params.category].header[lang],
+            url: `/${lang}/${params.subject}/${params.category}`
+        })
+    }
+
+    return identifiers;
 }

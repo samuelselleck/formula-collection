@@ -20,7 +20,7 @@
 	export let header;
 </script>
 
-<h1>{header}</h1>
+<br/>
 <div class="container">
 	{#each subjects as card}
 		<div class="cardholder">

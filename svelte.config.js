@@ -16,7 +16,7 @@ const config = {
 			assets: 'src/static'
 		},
 		prerender: {
-			pages: Object.keys(data["metadata"]["languages"]).map(e => `/${e}`)
+			pages: ["/", ...Object.keys(data["metadata"]["languages"]).map(e => `/${e}`)]
 		}
 	}
 };

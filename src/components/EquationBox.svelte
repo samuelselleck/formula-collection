@@ -23,7 +23,7 @@
 </script>
 
 <div on:click={navigate_to_interactive} class={interactive ? 'normal-border' : 'non-interactive'}> 
-    <h3> {header} </h3>
+    <h2> {header} </h2>
     {#each parts as part}
         <svelte:component this={components[part.component]} body={part.body}/>
     {/each}
