@@ -31,11 +31,6 @@
 
 <style>
 	
-	h1 {
-		text-transform: uppercase;
-		font-size: 4em;
-	}
-	
 	.container {
 		display: flex;
 		flex-wrap: wrap;
