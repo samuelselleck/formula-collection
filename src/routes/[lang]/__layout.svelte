@@ -72,8 +72,12 @@
     }
 
     nav {
+        position: sticky;
+        top: 0;
         display: flex;
         justify-content: space-between;
+        background-color: white;
+        z-index: 1;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
