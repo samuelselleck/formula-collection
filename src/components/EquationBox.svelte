@@ -14,6 +14,7 @@
     export let url;
 
     $: interactive = !url.includes("NONE")
+    $: external = url.includes("http")
 
     function navigate_to_interactive() {
         if (interactive) {
@@ -22,15 +23,22 @@
     }
 </script>
 
-<div on:click={navigate_to_interactive} class={interactive ? 'normal-border' : 'non-interactive'}> 
+<a class:disable={!interactive} href={url} target={external ? "_blank" : "_self"} class={interactive ? 'normal-border' : 'non-interactive'}> 
     <h2> {header} </h2>
     {#each parts as part}
         <svelte:component this={components[part.component]} body={part.body}/>
     {/each}
-</div>
+</a>
 
 <style>
-    div {
+    .disable {
+        pointer-events: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        display: block;
         margin: 20px;
         text-align: center;
     }
