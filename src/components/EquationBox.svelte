@@ -23,7 +23,7 @@
     }
 </script>
 
-<a class:disable={!interactive} href={url} target={external ? "_blank" : "_self"} class={interactive ? 'normal-border' : 'non-interactive'}> 
+<a  class:disable={!interactive} href={interactive ? url : "javascript:void(0)"} target={external ? "_blank" : "_self"} class={interactive ? 'normal-border' : 'non-interactive'}> 
     <h2> {header} </h2>
     {#each parts as part}
         <svelte:component this={components[part.component]} body={part.body}/>
@@ -31,10 +31,10 @@
 </a>
 
 <style>
-    .disable {
-        pointer-events: none;
-    }
 
+    .disable {
+        cursor: default;
+    }
     a {
         text-decoration: none;
         color: black;
