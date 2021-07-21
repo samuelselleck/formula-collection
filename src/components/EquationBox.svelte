@@ -3,42 +3,35 @@
     import { goto } from '$app/navigation';
     import Equation from './Equation.svelte';
     import Text from './Text.svelte';
-
+    import InlineEquation from './InlineEquation.svelte'
+import HrefDiv from './HrefDiv.svelte';
     const components = {
         "text": Text,
         "equation": Equation,
+        "inline_equation": InlineEquation,
     }
 
     export let parts;
     export let header;
     export let url;
 
-    $: interactive = !url.includes("NONE")
-    $: external = url.includes("http")
+    let interactive = !url.includes("NONE")
+    let external = url.includes("http")
 
-    function navigate_to_interactive() {
-        if (interactive) {
-            goto(url)
-        }
-    }
 </script>
 
-<a  class:disable={!interactive} href={interactive ? url : "javascript:void(0)"} target={external ? "_blank" : "_self"} class={interactive ? 'normal-border' : 'non-interactive'}> 
-    <h2> {header} </h2>
-    {#each parts as part}
-        <svelte:component this={components[part.component]} body={part.body}/>
-    {/each}
-</a>
+<HrefDiv active={interactive} {url} {external}>
+    <div class={interactive ? 'normal-border' : 'non-interactive'}>
+        <h2> {header} </h2>
+        {#each parts as part}
+            <svelte:component this={components[part.component]} body={part.body}/>
+        {/each}
+    </div>
+</HrefDiv>
 
 <style>
 
-    .disable {
-        cursor: default;
-    }
-    a {
-        text-decoration: none;
-        color: black;
-        display: block;
+    div {
         margin: 20px;
         text-align: center;
     }

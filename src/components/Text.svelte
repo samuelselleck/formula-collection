@@ -3,3 +3,9 @@
 </script>
 
 <p> {body} </p>
+
+<style>
+    p {
+        display: inline;
+    }
+</style>

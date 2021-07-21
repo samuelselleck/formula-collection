@@ -62,9 +62,45 @@ def extract_metadata(metadata):
 
 def find_equations(raw):
     raw = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', raw)
-    parts = re.split(r'\\begin{equation}|\\end{equation}', raw)
-    equations = parts[1::2]
-    return [{"component": "text" if i % 2 == 0 else "equation", "body": p.strip()} for i,p in enumerate(parts)]
+    parts = re.split(r'(\\begin{equation}|\\end{equation}|\$)', raw)
+
+    components = []
+    state = {
+        "component": None,
+        "contents": ""
+    }
+
+    def append_component(state):
+        component = {"component": state["component"], "body": state["contents"]}
+        components.append(component)
+        state["component"] = None
+        state["contents"] = ""
+
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+
+        if r'\begin{equation}' == part:
+            state["component"] = "equation"
+        elif r'\end{equation}' == part:
+            append_component(state)
+        elif '$' == part:
+            if state["component"] == "equation":
+                state["contents"] += part
+            elif state["component"] == "inline_equation":
+                append_component(state)
+            elif state["component"] is None:
+                state["component"] = "inline_equation"
+            else:
+                raise Exception("Could not parse inline equation inside other env")
+        else:
+            state["contents"] += part
+            if state["component"] is None:
+                state["component"] = "text"
+                append_component(state)
+    
+    return components
 
 def find_link(raw):
     link = re.findall(r'INTERACTIVE\[\\url{([\s\S]*?)}\]', raw)

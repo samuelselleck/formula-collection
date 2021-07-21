@@ -4,6 +4,10 @@ import fs from 'fs'
 
 let raw = fs.readFileSync('./src/json/subjects.json')
 let data = JSON.parse(raw)
+let baseLangUrls = Object.keys(data["metadata"]["languages"]).map(e => `/${e}`)
+
+let interactiveFiles = fs.readdirSync('./src/routes/[lang]/interactive').map(f => f.replace(/\.[^/.]+$/, ""))
+let interactiveUrls = interactiveFiles.flatMap(i => baseLangUrls.map(b => `${b}/interactive/${i}`))
 
 const config = {
 	kit: {
@@ -16,7 +20,7 @@ const config = {
 			assets: 'src/static'
 		},
 		prerender: {
-			pages: ["/", ...Object.keys(data["metadata"]["languages"]).map(e => `/${e}`)]
+			pages: ["/", ...baseLangUrls, ...interactiveUrls]
 		}
 	}
 };
