@@ -54,6 +54,7 @@
             units: [
                 {unit: "Pascal (Pa)", ...unit()},
                 {unit: "Standard Atmosphere (atm)", ...scale(9.86923e-6)},
+                //BAR
             ],
             starting: {from: "Standard Atmosphere", to: "Pascal", value: 1}
         },
