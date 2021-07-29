@@ -14,16 +14,18 @@
 		let lang = ctx.page.params.lang
         let pathHeaders = getPathHeaders(lang, ctx.page.params)
         let path = ctx.page.path.substr(3);
+        let compact = ctx.page.query.has("compact")
         let languages = Object.entries(data["metadata"]["languages"]).map(e => ({
             text: e[1],
             url: `/${e[0]}${path}`
         }))
-        return {props: {lang, languages, pathHeaders}}
+        return {props: {compact, lang, languages, pathHeaders}}
     }
 </script>
 
 <script>
     import { goto } from '$app/navigation';
+    export let compact;
 	export let lang;
     export let languages;
     export let pathHeaders;
@@ -44,6 +46,10 @@
         {/if}
     </span>
     <span class="spacer">
+        {#if pathHeaders.length > 2}
+            <a class="spacer" href={compact ? "?" : "?compact"}> {compact ? "Normal View" : "Compact View"} </a>
+            |
+        {/if}
         {#if languages}
             {#each languages as language}
                 <button class="lang-button" on:click={changeLang(language.url)}>{language.text}</button>
@@ -52,7 +58,7 @@
     </span>
 </nav>
 
-<main class="page-container" lang={lang}>
+<main class:page-container={!compact} class:compact lang={lang}>
 <slot></slot>
 </main>
 
@@ -79,6 +85,13 @@
         justify-content: space-between;
         z-index: 1;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .compact {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .spacer {

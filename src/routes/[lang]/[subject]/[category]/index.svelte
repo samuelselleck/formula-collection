@@ -2,7 +2,8 @@
     import { getEquations} from '$lib/page_tree.js';
     export async function load(ctx) {
         let {lang, subject, category} = ctx.page.params
-        return {props: getEquations(lang, subject, category)}
+        let compact = ctx.page.query.has("compact")
+        return {props: {compact, ...getEquations(lang, subject, category)}}
     }
 </script>
 
@@ -12,16 +13,17 @@
 
 <script>
     import EquationBox from '../../../../components/EquationBox.svelte';
+    export let compact;
     export let paragraphs;
     export let header;
 </script>
 
-<br/>
 {#if paragraphs}
 {#each paragraphs as parts}
-    <EquationBox {...parts}/>
+    <EquationBox {...parts} {compact}/>
 {/each}
 {/if}
 
 <style>
+
 </style>

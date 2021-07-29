@@ -8,13 +8,14 @@
 
 <style>
     .equation {
-        margin: 10px;
         display: block;
         justify-content: center;
         align-items: center;
         font-size: 1.2em !important;
+        padding: 3px;
         overflow: auto hidden;
     }
+
     @media (hover: none) {
         .scrollbox {
             overflow: auto;
