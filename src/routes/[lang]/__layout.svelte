@@ -46,10 +46,12 @@
         {/if}
     </span>
     <span class="spacer">
+        <span class="hideifsmall">
         {#if pathHeaders.length > 2}
             <a class="spacer" href={compact ? "?" : "?compact"}> {compact ? "Normal View" : "Compact View"} </a>
             |
         {/if}
+        </span>
         {#if languages}
             {#each languages as language}
                 <button class="lang-button" on:click={changeLang(language.url)}>{language.text}</button>
@@ -101,4 +103,10 @@
     .nowrap {
         white-space: nowrap;
     }
+
+    @media screen and (max-width: 800px) {
+        .hideifsmall {
+            display: none;
+        }
+	}
 </style>

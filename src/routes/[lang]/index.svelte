@@ -42,14 +42,4 @@
 		min-width: min-content;
 	}
 
-	@media screen and (max-width: 700px) {
-		h1 {
-            font-size: 2em;
-		}
-
-		.cardholder {
-			width: 100%;
-		}
-	}
-
 </style>
