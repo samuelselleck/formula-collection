@@ -5,6 +5,7 @@ import os
 import re
 
 EXPORT_SRC_FOLDER = "../src/json"
+EXPORT_LATEX_FOLDER = "generated"
 
 def main():
 
@@ -12,17 +13,23 @@ def main():
         with zip_f.open("main.tex", 'r') as tex_f:
             latex = tex_f.read().decode("utf-8")
             latex = remove_comments(latex)
+            latex = remove_format_commands(latex)
             header = re.findall(r'\\title{(.*)}', latex)[0]
             tree = create_document_tree(latex)
             metadata = extract_metadata(tree["Metadata"])
             del tree["Metadata"]
             body = create_page_tree(tree, metadata)
             export_json({"header": langs(header, metadata), "body": body, "metadata": metadata})
+            texfiles = export_latex(latex, metadata)
+            generate_pdfs(texfiles)
 
 #--------------------Parse Latex--------------------
 
 def remove_comments(raw):
     return re.sub(r'^%.*\n?', '', raw, flags=re.MULTILINE)
+
+def remove_format_commands(raw):
+    return re.sub(r'\\newpage', '', raw)
 
 def create_document_tree(raw, depth=0, max_depth=2):
     if depth <= max_depth:
@@ -124,6 +131,23 @@ def langs(raw, metadata):
 def export_json(subjects):
     with open(abs_path(f'{EXPORT_SRC_FOLDER}/subjects.json'), "w") as f:
         json.dump(subjects, f, indent=4)
+
+def export_latex(latex, metadata): 
+    latex = re.sub(r'^%.*\n?', '', latex, flags=re.MULTILINE)
+    latex = re.sub(r'\section{Metadata}[\s\S]*?\\newpage', '', latex, flags=re.MULTILINE)
+    latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
+    texfiles = []
+    languages = langs(latex, metadata)
+    for lang, tex in languages.items():
+        filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-complete.tex')
+        texfiles.append(filepath)
+        with open(filepath, 'w') as f:
+            f.write(tex)
+    return texfiles
+
+def generate_pdfs(texfiles):
+    for f in texfiles:
+        os.system(f'pdflatex -output-directory src/static/latex {f}')
 
 def abs_path(rel):
     script_dir = os.path.dirname(__file__)

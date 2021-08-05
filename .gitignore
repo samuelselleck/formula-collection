@@ -4,9 +4,12 @@ node_modules
 /.svelte-kit
 /functions
 /src/json
+/src/static/latex
 
 build_config.txt
 /generate_source/source
+/generate_source/generated
+
 cookies.txt
 /build
 /formulas
