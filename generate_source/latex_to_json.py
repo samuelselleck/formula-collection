@@ -132,22 +132,43 @@ def export_json(subjects):
     with open(abs_path(f'{EXPORT_SRC_FOLDER}/subjects.json'), "w") as f:
         json.dump(subjects, f, indent=4)
 
-def export_latex(latex, metadata): 
+def export_latex(latex, metadata):
     latex = re.sub(r'^%.*\n?', '', latex, flags=re.MULTILINE)
-    latex = re.sub(r'\section{Metadata}[\s\S]*?\\newpage', '', latex, flags=re.MULTILINE)
+    latex = re.sub(r'\\section{Metadata}[\s\S]*?\\section{', r'\\section{', latex, flags=re.MULTILINE)
     latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
+    latex = remove_numberings(latex)
     texfiles = []
     languages = langs(latex, metadata)
+    default = languages[metadata["default_language"]]
+    sections = [to_filename(s) for s in create_document_tree(default, max_depth=0).keys()]
+    print(sections)
     for lang, tex in languages.items():
         filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-complete.tex')
         texfiles.append(filepath)
         with open(filepath, 'w') as f:
             f.write(tex)
+
+        tree = create_document_tree(tex, max_depth=0)
+        packages = "\n".join(re.findall(r'\\usepackage{[\s\S]*?}', tex))
+        for i, (section, tex) in enumerate(tree.items()):
+            tex = "\documentclass{article}\n" + packages + "\\begin{document}\n" + tex  + "\\end{document}\n"
+            filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-{sections[i]}.tex')
+            texfiles.append(filepath)
+            with open(filepath, 'w') as f:
+                f.write(tex)
+        
     return texfiles
+
+def remove_numberings(latex):
+    for i in range(3):
+        latex = re.sub(f'\\\\{i*"sub"}section{{', f'\\\\{i*"sub"}section*{{', latex)
+    return latex
 
 def generate_pdfs(texfiles):
     for f in texfiles:
-        os.system(f'pdflatex -output-directory src/static/latex {f}')
+        os.system(f'pdflatex -output-directory generate_source/generated {f}')
+        pdf = os.path.basename(f).replace(".tex", ".pdf")
+        os.system(f'mv generate_source/generated/{pdf} src/static/latex/{pdf}')
 
 def abs_path(rel):
     script_dir = os.path.dirname(__file__)
