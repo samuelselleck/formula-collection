@@ -13,6 +13,7 @@
 	export async function load(ctx) {
 		let lang = ctx.page.params.lang
         let subject = ctx.page.params.subject
+        let category = ctx.page.params.category
         let pathHeaders = getPathHeaders(lang, ctx.page.params)
         let path = ctx.page.path.substr(3);
         let compact = ctx.page.query.has("compact")
@@ -20,7 +21,7 @@
             text: e[1],
             url: `/${e[0]}${path}`
         }))
-        return {props: {subject, compact, lang, languages, pathHeaders}}
+        return {props: {subject, category, compact, lang, languages, pathHeaders}}
     }
 </script>
 
@@ -28,6 +29,7 @@
     import { goto } from '$app/navigation';
 import PdfDownloader from '../../components/PdfDownloader.svelte';
     export let subject;
+    export let category;
     export let compact;
 	export let lang;
     export let languages;
@@ -55,6 +57,7 @@ import PdfDownloader from '../../components/PdfDownloader.svelte';
         {:else if pathHeaders.length == 2}
             <PdfDownloader url="/latex/{lang}-{subject}.pdf"/>
         {:else if pathHeaders.length > 2}
+            <PdfDownloader url="/latex/{lang}-{subject}-{category}.pdf"/>
             <a class="spacer" href={compact ? "?" : "?compact"}> {compact ? "Normal View" : "Compact View"} </a>
             |
         {/if}

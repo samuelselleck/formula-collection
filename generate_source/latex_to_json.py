@@ -7,6 +7,8 @@ import re
 EXPORT_SRC_FOLDER = "../src/json"
 EXPORT_LATEX_FOLDER = "generated"
 
+#I'm not proud if this code, okay? At least it's not that long!
+
 def main():
 
     with zipf.ZipFile(abs_path("source/Formelsamling.zip")) as zip_f:
@@ -16,11 +18,11 @@ def main():
             latex = remove_format_commands(latex)
             header = re.findall(r'\\title{(.*)}', latex)[0]
             tree = create_document_tree(latex)
-            metadata = extract_metadata(tree["Metadata"])
+            metadata = extract_metadata(tree["Metadata"]["tree"])
             del tree["Metadata"]
             body = create_page_tree(tree, metadata)
             export_json({"header": langs(header, metadata), "body": body, "metadata": metadata})
-            texfiles = export_latex(latex, metadata)
+            texfiles = export_latex(latex, tree, metadata)
             generate_pdfs(texfiles)
 
 #--------------------Parse Latex--------------------
@@ -36,7 +38,7 @@ def create_document_tree(raw, depth=0, max_depth=2):
         section_name = f"{depth*'sub'}section"
         matching = f'\\\\{section_name}\*?{{'
         sections = re.findall(f"{matching}(.*)}}([\s\S]*?)(?={matching}|$)", raw)
-        return {k:create_document_tree(v, depth + 1, max_depth) for k, v in sections}
+        return {k:{"tree": create_document_tree(v, depth + 1, max_depth), "raw": v} for k, v in sections}
     else:
         return raw
 
@@ -45,26 +47,26 @@ def create_page_tree(document_tree, metadata):
     page_tree = {}
     for k, v in document_tree.items():
         h = langs(k, metadata)
-        if isinstance(v, dict):
+        if isinstance(v["tree"], dict):
             page_tree[to_filename(h[default])] = {
                 "header": h,
-                "body": create_page_tree(v, metadata)
+                "body": create_page_tree(v["tree"], metadata)
             }
         else:
             page_tree[to_filename(h[default])] = {
                 "header": h,
-                "body": {lk:find_equations(lv) for lk, lv in langs(v, metadata).items()},
-                "link": find_link(v)
+                "body": {lk:find_equations(lv) for lk, lv in langs(v["tree"], metadata).items()},
+                "link": find_link(v["tree"])
             }
 
     return page_tree
     
 
 def extract_metadata(metadata):
-    languages_raw = metadata["Language Settings"]["Languages"]
+    languages_raw = metadata["Language Settings"]["tree"]["Languages"]["tree"]
     languages = re.findall(r'\\item(.*)\n?', languages_raw, flags=re.MULTILINE)
     languages = dict(tuple([t.strip() for t in s.split("-")]) for s in languages)
-    default_lang = metadata["Language Settings"]["Default"].strip()
+    default_lang = metadata["Language Settings"]["tree"]["Default"]["tree"].strip()
     return {"languages": languages, "default_language": default_lang}
 
 def find_equations(raw):
@@ -132,42 +134,55 @@ def export_json(subjects):
     with open(abs_path(f'{EXPORT_SRC_FOLDER}/subjects.json'), "w") as f:
         json.dump(subjects, f, indent=4)
 
-def export_latex(latex, metadata):
-    latex = re.sub(r'^%.*\n?', '', latex, flags=re.MULTILINE)
-    latex = re.sub(r'\\section{Metadata}[\s\S]*?\\section{', r'\\section{', latex, flags=re.MULTILINE)
-    latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
-    latex = remove_numberings(latex)
+def export_latex(latex, tree, metadata):
+    latex = clean_for_pdf(latex)
     texfiles = []
     languages = langs(latex, metadata)
-    default = languages[metadata["default_language"]]
-    sections = [to_filename(s) for s in create_document_tree(default, max_depth=0).keys()]
-    print(sections)
+    packages = "\n".join(re.findall(r'\\usepackage{[\s\S]*?}', latex))
+    default = metadata["default_language"]
+
     for lang, tex in languages.items():
+        
         filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-complete.tex')
         texfiles.append(filepath)
         with open(filepath, 'w') as f:
             f.write(tex)
-
-        tree = create_document_tree(tex, max_depth=0)
-        packages = "\n".join(re.findall(r'\\usepackage{[\s\S]*?}', tex))
-        for i, (section, tex) in enumerate(tree.items()):
-            tex = "\documentclass{article}\n" + packages + "\\begin{document}\n" + tex  + "\\end{document}\n"
-            filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-{sections[i]}.tex')
+  
+    
+    def create_texs(sup, title, section):
+        langtitle = langs(title, metadata)
+        langsection = langs(section["raw"], metadata)
+        for lang in langsection.keys():
+            tex = "\documentclass{article}\n" + packages + f'\n\n\\begin{{document}}\section*{{{langtitle[lang]}}}\n' + langsection[lang] + "\\end{document}\n"
+            tex = clean_for_pdf(tex)
+            filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-{sup}{to_filename(langtitle[default])}.tex')
             texfiles.append(filepath)
             with open(filepath, 'w') as f:
                 f.write(tex)
+
+    for title, section in tree.items():
+        create_texs("", title, section)
+        langtitle = langs(title, metadata)
+        for title, section in section["tree"].items():
+            create_texs(to_filename(langtitle[default]) + "-", title, section)
         
     return texfiles
 
-def remove_numberings(latex):
+def clean_for_pdf(latex):
+    latex = re.sub(r'\\section{Metadata}[\s\S]*?\\section{', r'\\section{', latex, flags=re.MULTILINE)
     for i in range(3):
         latex = re.sub(f'\\\\{i*"sub"}section{{', f'\\\\{i*"sub"}section*{{', latex)
+    latex = latex.replace(f'\\begin{{equation}}', f'\\begin{{equation*}}')
+    latex = latex.replace(f'\\end{{equation}}', f'\\end{{equation*}}')
+    latex = re.sub(r'^%.*\n?', '', latex, flags=re.MULTILINE)
+    latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
     return latex
 
 def generate_pdfs(texfiles):
     for f in texfiles:
         os.system(f'pdflatex -output-directory generate_source/generated {f}')
         pdf = os.path.basename(f).replace(".tex", ".pdf")
+        print(pdf)
         os.system(f'mv generate_source/generated/{pdf} src/static/latex/{pdf}')
 
 def abs_path(rel):
