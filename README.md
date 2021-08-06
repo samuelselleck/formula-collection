@@ -73,5 +73,5 @@ For an example of how the metadata section can be structured, see section on Lat
 # Build Process
 
 - The website is built in two steps:
-    - After the source has been downloaded, a python script located under generate_source/latex_to_json.py converts the latex source document to json, placing the newly generated page source in the src/json folder
+    - After the source has been downloaded, a python script located under generate_source/latex_to_json.py converts the latex source document to json, placing the newly generated page source in the src/json folder, this script also creates tex files of the subjects for each language under generate_source/generated, and generates pdf files in src/static/latex.
     - The svelte components (placed under src/components) and pages (placed under src/routes) use this source to to generate a static website during the build step (runs npm run build). The new website folder is then uploaded to the webserver over ssh
