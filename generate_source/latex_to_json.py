@@ -7,8 +7,6 @@ import re
 EXPORT_SRC_FOLDER = "../src/json"
 EXPORT_LATEX_FOLDER = "generated"
 
-#I'm not proud if this code, okay? At least it's not that long!
-
 def main():
 
     with zipf.ZipFile(abs_path("source/Formelsamling.zip")) as zip_f:
@@ -24,8 +22,6 @@ def main():
             export_json({"header": langs(header, metadata), "body": body, "metadata": metadata})
             texfiles = export_latex(latex, tree, metadata)
             generate_pdfs(texfiles)
-
-#--------------------Parse Latex--------------------
 
 def remove_comments(raw):
     return re.sub(r'^%.*\n?', '', raw, flags=re.MULTILINE)
@@ -48,15 +44,20 @@ def create_page_tree(document_tree, metadata):
     for k, v in document_tree.items():
         h = langs(k, metadata)
         if isinstance(v["tree"], dict):
-            page_tree[to_filename(h[default])] = {
-                "header": h,
-                "body": create_page_tree(v["tree"], metadata)
-            }
+            if (url := find_link(v["raw"].split('\n', 2)[1])) == "NONE":
+                page_tree[to_filename(h[default])] = {
+                    "header": h,
+                    "body": create_page_tree(v["tree"], metadata)
+                }
+            else:
+                page_tree[f'interactive/{url}'] = {
+                    "header": h,
+                }
         else:
             page_tree[to_filename(h[default])] = {
                 "header": h,
                 "body": {lk:find_equations(lv) for lk, lv in langs(v["tree"], metadata).items()},
-                "link": find_link(v["tree"])
+                "link": find_link(v["tree"]),
             }
 
     return page_tree
@@ -153,7 +154,7 @@ def export_latex(latex, tree, metadata):
         langtitle = langs(title, metadata)
         langsection = langs(section["raw"], metadata)
         for lang in langsection.keys():
-            tex = "\documentclass{article}\n" + packages + f'\n\n\\begin{{document}}\section*{{{langtitle[lang]}}}\n' + langsection[lang] + "\\end{document}\n"
+            tex = "\documentclass[twocolumn]{article}\n" + packages + f'\n\n\\begin{{document}}\section*{{{langtitle[lang]}}}\n' + langsection[lang] + "\\end{document}\n"
             tex = clean_for_pdf(tex)
             filepath = abs_path(f'{EXPORT_LATEX_FOLDER}/{lang}-{sup}{to_filename(langtitle[default])}.tex')
             texfiles.append(filepath)
@@ -169,13 +170,13 @@ def export_latex(latex, tree, metadata):
     return texfiles
 
 def clean_for_pdf(latex):
+    latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
     latex = re.sub(r'\\section{Metadata}[\s\S]*?\\section{', r'\\section{', latex, flags=re.MULTILINE)
     for i in range(3):
         latex = re.sub(f'\\\\{i*"sub"}section{{', f'\\\\{i*"sub"}section*{{', latex)
     latex = latex.replace(f'\\begin{{equation}}', f'\\begin{{equation*}}')
     latex = latex.replace(f'\\end{{equation}}', f'\\end{{equation*}}')
     latex = re.sub(r'^%.*\n?', '', latex, flags=re.MULTILINE)
-    latex = re.sub(r'INTERACTIVE\[\\url{[\s\S]*?}\]', '', latex)
     return latex
 
 def generate_pdfs(texfiles):
