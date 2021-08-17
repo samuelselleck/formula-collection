@@ -3,14 +3,12 @@
     import Converter from "../../../components/Converter.svelte";
 
     let conversions = [
-        //lägg till fler? se lista på: https://sv.wikipedia.org/wiki/SI-enhet
         {
             quantity: "Length",
             units: [
                 {unit: "Meters (m)", ...unit()},
                 {unit: "Feet (ft)",  ...scale(3.2808399)},
-                {unit: "Kilometer (km)", ...scale(1/1000)},
-                {unit: "Nanometer (nm)", ...scale(1e9)},
+                {unit: "Inch (in)", ...scale(39.3700787)},
             ],
             starting: {from: "Meters", to: "Feet", value: 1}
         },
@@ -54,7 +52,9 @@
             units: [
                 {unit: "Pascal (Pa)", ...unit()},
                 {unit: "Standard Atmosphere (atm)", ...scale(9.86923e-6)},
-                //BAR
+                {unit: "Bar", ...scale(1e-5)},
+                {unit: "Millibar", ...scale(1e-2)},
+                {unit: "Torr (mmHg)", ...scale(133.322368)},
             ],
             starting: {from: "Standard Atmosphere", to: "Pascal", value: 1}
         },
