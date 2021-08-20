@@ -53,7 +53,7 @@ fi
 
 if [[ ${build_variables['upload']} == true ]]; then
   print_desc "uploading to webserver";
-  rm -r ${build_variables['folder']}
+  rm -r ${build_variables['folder']} || true
   mv dist ${build_variables['folder']}
   rsync -alPvz ${build_variables['folder']} ${build_variables['ssh_dest']}:/www/;
 else
