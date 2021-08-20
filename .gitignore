@@ -9,7 +9,7 @@ node_modules
 build_config.txt
 /generate_source/source
 /generate_source/generated
-
+/courses
 cookies.txt
 /build
 /formulas
