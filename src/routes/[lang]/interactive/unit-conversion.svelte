@@ -43,7 +43,7 @@
             quantity: "Energy",
             units: [
                 {unit: "Joule (J)", ...unit()},
-                {unit: "Electron Volt (eV)", ...scale(1.602176634e-19)},
+                {unit: "Electron Volt (eV)", ...scale(6.24150913e18)},
             ],
             starting: {from: "Joule", to: "Electron Volt", value: 1}
         },

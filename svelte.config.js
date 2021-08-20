@@ -12,7 +12,7 @@ let interactiveUrls = interactiveFiles.flatMap(i => baseLangUrls.map(b => `${b}/
 const config = {
 	kit: {
 		adapter: adapter({
-			pages: 'formulas',
+			pages: 'dist',
 			fallback: null,
 		}),
 		target: '#svelte',

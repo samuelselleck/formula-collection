@@ -1,0 +1,22 @@
+{
+    "short_name": "Formulas",
+    "name": "Formula Collection",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "favico.ico",
+        "type": "image/png",
+        "sizes": "128x128"
+      },
+      {
+        "src": "icon.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "background_color": "#f5f8ff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#f5f8ff",
+    "description": "Complete engineering formula collection."
+}

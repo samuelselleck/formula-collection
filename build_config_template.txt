@@ -1,6 +1,7 @@
 overleaf_source <overleaf source document>
 overleaf_session_cookie <cookie (overleaf_session2)>
 ssh_dest <ssh destination>
+folder <folder name>
 download true
 compile true
 upload true

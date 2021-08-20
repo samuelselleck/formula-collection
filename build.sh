@@ -53,7 +53,9 @@ fi
 
 if [[ ${build_variables['upload']} == true ]]; then
   print_desc "uploading to webserver";
-  rsync -alPvz formulas ${build_variables['ssh_dest']}:/www/;
+  rm -r ${build_variables['folder']}
+  mv dist ${build_variables['folder']}
+  rsync -alPvz ${build_variables['folder']} ${build_variables['ssh_dest']}:/www/;
 else
   echo "Not upploading changes to webserver (upload = false)."
 fi
