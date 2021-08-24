@@ -35,7 +35,7 @@
             units: [
                 {unit: "Kilogram (kg)", ...unit()},
                 {unit: "Gram (g)", ...scale(1000)},
-                {unit: "Dalton (u)", ...scale(6.022173643e+26)},
+                {unit: "Dalton (u)", ...scale(6.022140762e+26)},
             ],
             starting: {from: "Kilogram", to: "Gram", value: 1}
         },

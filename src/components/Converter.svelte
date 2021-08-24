@@ -11,10 +11,10 @@
     let toValue;
 
     function updateToValue() {
-        toValue = Number(selectedTo.apply(selectedFrom.inverse(fromValue))).toPrecision(7)
+        toValue = selectedTo.apply(selectedFrom.inverse(fromValue)).toPrecision(7)
     }
     function updateFromValue() {
-        fromValue = Number(selectedFrom.apply(selectedTo.inverse(toValue))).toPrecision(7)
+        fromValue = selectedFrom.apply(selectedTo.inverse(toValue)).toPrecision(7)
     }
 
     $: selectedFrom, selectedTo, updateToValue()
