@@ -16,12 +16,13 @@
         let category = ctx.page.params.category
         let pathHeaders = getPathHeaders(lang, ctx.page.params)
         let path = ctx.page.path.substr(3);
+        let interactive = ctx.page.path.includes("interactive")
         let compact = ctx.page.query.has("compact")
         let languages = Object.entries(data["metadata"]["languages"]).map(e => ({
             text: e[1],
             url: `/${e[0]}${path}`
         }))
-        return {props: {subject, category, compact, lang, languages, pathHeaders}}
+        return {props: {subject, category, compact, lang, languages, pathHeaders, interactive}}
     }
 </script>
 
@@ -34,6 +35,7 @@ import PdfDownloader from '../../components/PdfDownloader.svelte';
 	export let lang;
     export let languages;
     export let pathHeaders;
+    export let interactive;
 
     const changeLang = async url => {
         goto(url, {replaceState: true, noscroll: true})
@@ -50,6 +52,7 @@ import PdfDownloader from '../../components/PdfDownloader.svelte';
             {/each}
         {/if}
     </span>
+    {#if !interactive}
     <span class="spacer">
         <span class="hideifsmall">
         {#if pathHeaders.length == 1}
@@ -68,6 +71,7 @@ import PdfDownloader from '../../components/PdfDownloader.svelte';
             {/each}
         {/if}
     </span>
+    {/if}
 </nav>
 
 <main class:page-container={!compact} class:compact lang={lang}>

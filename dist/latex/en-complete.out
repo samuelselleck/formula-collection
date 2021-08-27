@@ -1,0 +1,104 @@
+\BOOKMARK [1][-]{section.1}{Metadata}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Language Settings}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Integrals and Identities}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Some integrals}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Indefinite Integrals}{subsection.2.1}% 5
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Definite Integrals}{subsection.2.1}% 6
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Stirling's approximation}{subsection.2.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.1.4}{Error Function}{subsection.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Power Series}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Trigonometric Functions}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Hyperbolic Functions}{section.2}% 11
+\BOOKMARK [1][-]{section.3}{Vector Analysis}{}% 12
+\BOOKMARK [2][-]{subsection.3.1}{Vector Analysis}{section.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Vector Products}{subsection.3.1}% 14
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Gradient, Divergence, Curl and The Laplace Operator}{subsection.3.1}% 15
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Gauss sats}{subsection.3.1}% 16
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Stokes sats}{subsection.3.1}% 17
+\BOOKMARK [3][-]{subsubsection.3.1.5}{Greens sats}{subsection.3.1}% 18
+\BOOKMARK [1][-]{section.4}{Electromagnetic field theory}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{static}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Coulombs law}{subsection.4.1}% 21
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Electric Field Strength}{subsection.4.1}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Electrical Potential}{subsection.4.1}% 23
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Electrical flow density}{subsection.4.1}% 24
+\BOOKMARK [3][-]{subsubsection.4.1.5}{Polarization Charge}{subsection.4.1}% 25
+\BOOKMARK [3][-]{subsubsection.4.1.6}{Boundary Conditions}{subsection.4.1}% 26
+\BOOKMARK [3][-]{subsubsection.4.1.7}{Electrostatic Energy}{subsection.4.1}% 27
+\BOOKMARK [3][-]{subsubsection.4.1.8}{Maxwell's voltage}{subsection.4.1}% 28
+\BOOKMARK [3][-]{subsubsection.4.1.9}{Torque on Electrical Dipole}{subsection.4.1}% 29
+\BOOKMARK [2][-]{subsection.4.2}{DC Current}{section.4}% 30
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Current Density}{subsection.4.2}% 31
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Conservation Equation}{subsection.4.2}% 32
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Conductivity}{subsection.4.2}% 33
+\BOOKMARK [3][-]{subsubsection.4.2.4}{Effect}{subsection.4.2}% 34
+\BOOKMARK [3][-]{subsubsection.4.2.5}{Boundary Conditions}{subsection.4.2}% 35
+\BOOKMARK [3][-]{subsubsection.4.2.6}{Time Constant}{subsection.4.2}% 36
+\BOOKMARK [3][-]{subsubsection.4.2.7}{Analogy Elektrostatics - DC Current}{subsection.4.2}% 37
+\BOOKMARK [2][-]{subsection.4.3}{Derivatives}{section.4}% 38
+\BOOKMARK [1][-]{section.5}{Fourier Analysis}{}% 39
+\BOOKMARK [2][-]{subsection.5.1}{Fourier Analysis Introduction}{section.5}% 40
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Fourier s integral theorem}{subsection.5.1}% 41
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Periodic boundaries}{subsection.5.1}% 42
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Dirac Delta Function}{subsection.5.1}% 43
+\BOOKMARK [3][-]{subsubsection.5.1.4}{Kronecker Delta}{subsection.5.1}% 44
+\BOOKMARK [1][-]{section.6}{Mechanics}{}% 45
+\BOOKMARK [2][-]{subsection.6.1}{Mechanics}{section.6}% 46
+\BOOKMARK [1][-]{section.7}{Quantum Mechanics}{}% 47
+\BOOKMARK [2][-]{subsection.7.1}{Quantum Mechanics}{section.7}% 48
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Schr\366dinger Equation}{subsection.7.1}% 49
+\BOOKMARK [2][-]{subsection.7.2}{Operators}{section.7}% 50
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Linear Operator}{subsection.7.2}% 51
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Eigenvalue, Eigenfunction}{subsection.7.2}% 52
+\BOOKMARK [3][-]{subsubsection.7.2.3}{Hermitian Operator}{subsection.7.2}% 53
+\BOOKMARK [3][-]{subsubsection.7.2.4}{Eigenfunction Expansion}{subsection.7.2}% 54
+\BOOKMARK [3][-]{subsubsection.7.2.5}{Expansion Postulate}{subsection.7.2}% 55
+\BOOKMARK [3][-]{subsubsection.7.2.6}{Momentum Operators}{subsection.7.2}% 56
+\BOOKMARK [3][-]{subsubsection.7.2.7}{Commutators and Momentum Operators}{subsection.7.2}% 57
+\BOOKMARK [2][-]{subsection.7.3}{Applications}{section.7}% 58
+\BOOKMARK [3][-]{subsubsection.7.3.1}{Low potential with infinitely rigid walls in one dimension}{subsection.7.3}% 59
+\BOOKMARK [3][-]{subsubsection.7.3.2}{Harmonic Oscillator 1D}{subsection.7.3}% 60
+\BOOKMARK [3][-]{subsubsection.7.3.3}{Spherical Symmetric Potential}{subsection.7.3}% 61
+\BOOKMARK [3][-]{subsubsection.7.3.4}{Hydrogen-like Atom}{subsection.7.3}% 62
+\BOOKMARK [2][-]{subsection.7.4}{Disturbance Calculations}{section.7}% 63
+\BOOKMARK [3][-]{subsubsection.7.4.1}{"Golden Rule"}{subsection.7.4}% 64
+\BOOKMARK [3][-]{subsubsection.7.4.2}{Dispersion \(Born Approximation\)}{subsection.7.4}% 65
+\BOOKMARK [3][-]{subsubsection.7.4.3}{Periodic Potential}{subsection.7.4}% 66
+\BOOKMARK [1][-]{section.8}{Atomic Physics}{}% 67
+\BOOKMARK [2][-]{subsection.8.1}{Atomic Physics}{section.8}% 68
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Rydberg}{subsection.8.1}% 69
+\BOOKMARK [3][-]{subsubsection.8.1.2}{Alkaline-like System}{subsection.8.1}% 70
+\BOOKMARK [3][-]{subsubsection.8.1.3}{Hydrogen-like Atoms}{subsection.8.1}% 71
+\BOOKMARK [3][-]{subsubsection.8.1.4}{Radial Functions for Hydrogen-like Systems}{subsection.8.1}% 72
+\BOOKMARK [3][-]{subsubsection.8.1.5}{Spherical Surface Functions}{subsection.8.1}% 73
+\BOOKMARK [3][-]{subsubsection.8.1.6}{Hamilton Operator for Multi-electron Systems}{subsection.8.1}% 74
+\BOOKMARK [3][-]{subsubsection.8.1.7}{LS coupling}{subsection.8.1}% 75
+\BOOKMARK [3][-]{subsubsection.8.1.8}{Zeeman Effect}{subsection.8.1}% 76
+\BOOKMARK [3][-]{subsubsection.8.1.9}{Connection between magnetic moment and momentum}{subsection.8.1}% 77
+\BOOKMARK [3][-]{subsubsection.8.1.10}{Doppler Width}{subsection.8.1}% 78
+\BOOKMARK [3][-]{subsubsection.8.1.11}{Most Probable Speed}{subsection.8.1}% 79
+\BOOKMARK [3][-]{subsubsection.8.1.12}{Dopplershift}{subsection.8.1}% 80
+\BOOKMARK [3][-]{subsubsection.8.1.13}{Natural Width}{subsection.8.1}% 81
+\BOOKMARK [3][-]{subsubsection.8.1.14}{Hyper Fine Structure}{subsection.8.1}% 82
+\BOOKMARK [3][-]{subsubsection.8.1.15}{For S-electrons in Hydrogen-like Systems}{subsection.8.1}% 83
+\BOOKMARK [3][-]{subsubsection.8.1.16}{Boltzman Distribution}{subsection.8.1}% 84
+\BOOKMARK [3][-]{subsubsection.8.1.17}{Integrals}{subsection.8.1}% 85
+\BOOKMARK [3][-]{subsubsection.8.1.18}{Operators}{subsection.8.1}% 86
+\BOOKMARK [3][-]{subsubsection.8.1.19}{Dirac Notation}{subsection.8.1}% 87
+\BOOKMARK [3][-]{subsubsection.8.1.20}{Commutators}{subsection.8.1}% 88
+\BOOKMARK [3][-]{subsubsection.8.1.21}{Schr\366dinger Equation}{subsection.8.1}% 89
+\BOOKMARK [1][-]{section.9}{Waves and Optics}{}% 90
+\BOOKMARK [2][-]{subsection.9.1}{Light}{section.9}% 91
+\BOOKMARK [2][-]{subsection.9.2}{Material Properties for Sound and Light}{section.9}% 92
+\BOOKMARK [2][-]{subsection.9.3}{Geometrical Optics}{section.9}% 93
+\BOOKMARK [2][-]{subsection.9.4}{Diffraction and Interferance}{section.9}% 94
+\BOOKMARK [2][-]{subsection.9.5}{Fresnel Diffraction}{section.9}% 95
+\BOOKMARK [2][-]{subsection.9.6}{Polarization}{section.9}% 96
+\BOOKMARK [1][-]{section.10}{Thermodynamics}{}% 97
+\BOOKMARK [2][-]{subsection.10.1}{Thermodynamics}{section.10}% 98
+\BOOKMARK [2][-]{subsection.10.2}{Tables}{section.10}% 99
+\BOOKMARK [1][-]{section.11}{Constants}{}% 100
+\BOOKMARK [2][-]{subsection.11.1}{Constants}{section.11}% 101
+\BOOKMARK [1][-]{section.12}{Prefix}{}% 102
+\BOOKMARK [2][-]{subsection.12.1}{Prefix}{section.12}% 103
+\BOOKMARK [3][-]{subsubsection.12.1.1}{SI-prefix}{subsection.12.1}% 104
