@@ -55,6 +55,7 @@
                 {unit: "Bar", ...scale(1e-5)},
                 {unit: "Millibar", ...scale(1e-2)},
                 {unit: "Torr (mmHg)", ...scale(133.322368)},
+				{unit: "Pound per Square inch (PSI)", ...scale(0.000145038)},
             ],
             starting: {from: "Standard Atmosphere", to: "Pascal", value: 1}
         },
